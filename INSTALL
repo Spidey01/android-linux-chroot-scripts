@@ -1,0 +1,16 @@
+
+0. Choose where to store your chroot. The default is /data/local/Linux, and should work fine for tablets.
+
+1. Execute ./install.sh and follow the prompts.
+
+If ./ = $LINUX_CHROOT and you are using a git clone, then it is reccomended that you create a device local branch after installation is complete. For example:
+
+    ./install.sh
+    ./linuxchroot.sh
+    apt-get install git
+    cd /
+    git stash save  # if you have any local changes
+    git checkout -b `hostname`.`git branch | grep '*' | cut -d' ' -f 2`
+    git stash pop   # if you have any local changes
+    git commit -a   # if you have any local changes
+

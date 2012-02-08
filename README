@@ -1,0 +1,55 @@
+This is a set of scripts designed for using a Linux chroot on Android.
+
+## ROAD MAP ##
+
+install.sh
+: installs a Linux chroot on your Android device. See INSTALL file.
+
+linuxchroot.sh
+: chroot's you 
+
+etc/init.android/rc.enter
+: Base system script ran when entering the chroot.
+
+usr/local/etc/init.android/rc.enter
+: Local system script ran when entering the chroot.
+
+etc/init.android/rc.leave
+: Base system script ran when leaving the chroot.
+
+usr/local/etc/init.android/rc.leave
+: Local system script ran when leaving the chroot.
+
+etc/init.android/rc.conf
+: Base system configuration file.
+
+usr/local/etc/init.android/rc.conf
+: Local system configuration, overrides anything in etc/init.android/rc.conf.
+
+## INIT SYSTEM ##
+
+The init system is simple, look at the end of linuxchroot.sh!
+
+- Scripts with filenames matching E* will be run on order before entering the chroot.
+- Scripts with filenames matching L* will be run in order when the chrooted shell exits and returns control back to linuxchroot.sh.
+
+Place scripts for your local system in ${LINUX_CHROOT}/usr/local/etc/init.android.
+
+If it applies to just about every Android device: place it in ${LINUX_CHROOT}/etc/init.android, commit it, push to GitHub, and send me a pull request explaining the changes.
+
+
+The execution order is as follows:
+
+	linuxchroot.sh ->
+		etc/init.android/rc.enter ->
+			etc/init.android/E*
+		usr/local/etc/init.android/rc.enter ->
+			usr/local/etc/init.android/E*
+		chroot $LINUX_CHROOT /bin/sh ->
+			Your initial shell.
+		etc/init.android/rc.leave ->
+			etc/init.android/L*
+		usr/local/etc/init.android/rc.leave ->
+			usr/local/etc/init.android/L*
+
+

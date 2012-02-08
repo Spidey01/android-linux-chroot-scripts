@@ -1,0 +1,10 @@
+# BusyBox script ran after etc/init.d/init.android/ phase.
+#
+# Use this script for local system shutdown to be done before leaving the chroot.
+#
+# You do not need to manually execute your local ./L* scripts here, the systems
+# rc.leave script will do that automatically. 
+#
+
+
+

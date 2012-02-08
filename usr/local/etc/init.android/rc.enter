@@ -1,0 +1,9 @@
+# BusyBox script ran after etc/init.d/init.android/ phase.
+#
+# Use this script for local system startup to be done before entering the chroot.
+#
+# You do not need to manually execute your local ./E* scripts here, the systems
+# rc.enter script will do that automatically. 
+#
+
+
