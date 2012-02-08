@@ -1,0 +1,10 @@
+# Stop services on rc.leave
+
+if [ -z "$leave_services" ]; then
+    exit 0
+fi
+
+for srv in $leave_services; do
+    $busybox chroot . /etc/init.d/$srv stop
+done
+

@@ -1,0 +1,15 @@
+# clean up /tmp
+
+if [ -z "$clean_tmpdir" ]; then
+	exit 0
+fi
+
+case $clean_tmpdir in
+    enter)
+        exit 0
+        ;;
+    *)
+        echo rm -rf /tmp/*
+        ;;
+esac
+

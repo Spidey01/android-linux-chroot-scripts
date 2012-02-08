@@ -1,0 +1,16 @@
+# BusyBox script ran to de-init the chroot.
+#
+
+for rcfile in \
+    etc/init.android/L* \
+    usr/local/etc/init.android/L*
+do
+    if ! $BUSYBOX sh "$rcfile" 2>/dev/null
+    then
+        echo "$rcfile failed."
+    fi
+done
+
+
+return 0
+

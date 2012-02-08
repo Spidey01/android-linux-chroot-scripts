@@ -1,0 +1,12 @@
+installer needs to 
+
+	be able to install busybox.
+	download/unpack debian.
+	set etc/hostname if a hostname is given.
+	be nice to have centos style package groups available to quickly apt-get.
+
+README
+
+	update to note that init scripts are run from in the context of cd $LINUX_CHROOT.
+	update to note that scripts must return 0 = success != 0 = abort.
+	update to note how rc.conf/script changes from within the chroot fit into exiting.

@@ -22,7 +22,7 @@ for busybox in \
     #FIXME and move to after galoula /data/data/com.spartacusrex.spartacuside/ 
 do
     if [ -x $busybox ]; then
-        export busybox
+        export BUSYBOX
         break
     fi
 done
@@ -40,10 +40,28 @@ fi
 echo "Initializing chroot..."
 # sequence of busybox scripts and commands to run in a sanitary sub shell.
 (
+    if ! cd "$LINUX_CHROOT"; then
+        echo "Can't cd to chroot"
+        return 1
+    fi
+
+    # Source rc.conf files NOW.
+    for conf in \
+        etc/init.android/rc.conf \
+        usr/local/etc/init.android/rc.conf
+    do
+        if [ -f "$conf" ]; then
+            . "./$conf"
+            export `cat "$conf" | \
+                        grep -v -E '^\s*#' | grep -v -E '^$' | \
+                        cut -d= -f 1` >/dev/null
+        fi
+    done
+
     for rc in \
         "/etc/init.android/rc.enter" \
         "/usr/local/etc/init.android/rc.enter" \
-        "chroot $LINUX_CHROOT env SHELL=/bin/sh /bin/sh -i -l" \
+        "chroot $LINUX_CHROOT env PWD= SHELL=/bin/sh /bin/sh -i -l" \
         "/etc/init.android/rc.leave" \
         "/usr/local/etc/init.android/rc.leave"
     do
@@ -52,13 +70,19 @@ echo "Initializing chroot..."
                 rcfile="${LINUX_CHROOT}/${rc}"
                 if [ -f "$rcfile" ]; then
                     echo "Running $rc script..."
-                    echo "$busybox" "$rcfile"
+                    if ! $BUSYBOX sh $rcfile; then
+                        echo "$rc script failed. Aborting chroot entry."
+                        exit 1
+                    fi
                 else
                     echo "No $rc script..."
                 fi
                 ;;
             *)
-                $busybox $rc
+                if ! $BUSYBOX $rc; then
+                    echo "Bad busybox command. Aborting chroot entry."
+                    exit 1
+                fi
                 ;;
         esac
 

@@ -1,0 +1,14 @@
+# Start services on rc.enter
+
+if [ -z "$enter_services" ]; then
+    exit 0
+fi
+
+for srv in $enter_services; do
+    status="`$busybox chroot . /etc/init.d/$srv status`"
+    if $?; then
+        echo $busybox chroot . /etc/init.d/$srv start
+    else
+        echo $status
+    fi
+done

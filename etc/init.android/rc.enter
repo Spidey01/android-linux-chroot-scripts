@@ -1,0 +1,15 @@
+# BusyBox script ran to setup the chroot.
+#
+
+for rcfile in \
+    etc/init.android/E* \
+    usr/local/etc/init.android/E*
+do
+    if ! $BUSYBOX sh "$rcfile" 2>/dev/null
+    then
+        echo "$rcfile failed."
+    fi
+done
+
+
+return 0

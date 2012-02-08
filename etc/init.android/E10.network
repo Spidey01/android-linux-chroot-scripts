@@ -1,0 +1,29 @@
+
+if [ -n "$hostname" ]; then
+    echo $hostname > etc/hostname
+fi
+$BUSYBOX chroot . /etc/init.d/hostname.sh start
+
+
+if [ -n "$resolv_map" ]; then
+    if [ -z "$resolv_mappings" ]; then
+        echo "Can't use resolv_map in rc.conf without setting rsolv_mappings"
+    fi
+
+    myip="`ifconfig $resolv_iface | \
+        grep -E 'inet.* addr:' | \
+        cut -d: -f 2 | \
+        cut -d' ' -f 1`"
+
+
+    for ip in $resolv_mappings; do 
+        if echo $myip | grep $ip >/dev/null; then
+            if ! \
+                cp ./usr/local/etc/resolv.d/${ip}.conf ./etc/resolv.conf
+            then
+                echo "no resolv.conf setup for $myip"
+            fi
+            break
+        fi
+    done
+fi
