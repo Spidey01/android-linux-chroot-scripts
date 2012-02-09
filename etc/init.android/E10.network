@@ -4,6 +4,9 @@ if [ -n "$hostname" ]; then
 fi
 $BUSYBOX chroot . /etc/init.d/hostname.sh start
 
+if [ -n "$ipv4_forwarding" ]; then
+	echo 1 > /proc/sys/net/ipv4/ip_forward
+fi
 
 if [ -n "$resolv_map" ]; then
     if [ -z "$resolv_mappings" ]; then
