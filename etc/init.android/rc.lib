@@ -1,0 +1,17 @@
+# BusyBox script sourced for functions.
+
+# return 0=not mounted, !=0=mounted
+#
+# usage: if not_mounted /proc; then mount ...; fi
+#
+mounted() {
+    local what
+    what="$1"
+
+    if grep "${LINUX_CHROOT}${what}" /proc/mounts >/dev/null
+    then
+        return 0
+    fi
+    return 1
+} 
+

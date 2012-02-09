@@ -1,0 +1,19 @@
+# De-Linuxification
+
+. "${LINUX_CHROOT_RCDIR}/rc.lib"
+
+if [ -n "$leave_linux_dirs" ]; then
+    exit 0
+fi
+
+
+for sdir in /sys/kernel/debug /sys \
+            /proc \
+            /dev/pts /dev
+do
+    if mounted "$sdir"
+    then
+        echo "umount for chroot/$sdir"
+        umount "${LINUX_CHROOT}${sdir}"
+    fi
+done

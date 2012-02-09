@@ -1,0 +1,13 @@
+# Ensure Linuxification
+
+. "${LINUX_CHROOT_RCDIR}/rc.lib"
+
+for sdir in /dev /dev/pts /proc /sys /sys/kernel/debug
+do
+    if ! mounted "$sdir"
+    then
+        mkdir -p "${LINUX_CHROOT}${sdir}" 2>/dev/null
+        mount -o bind "$sdir" "${LINUX_CHROOT}${sdir}" 2>/dev/null
+    fi
+done
+
