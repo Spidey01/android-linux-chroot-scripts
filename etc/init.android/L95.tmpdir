@@ -9,7 +9,7 @@ case $clean_tmpdir in
         exit 0
         ;;
     *)
-        echo rm -rf /tmp/*
+        rm -rf ./tmp/*
         ;;
 esac
 
