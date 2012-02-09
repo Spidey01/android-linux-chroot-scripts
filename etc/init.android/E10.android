@@ -1,0 +1,18 @@
+# Mount Android directories.
+# Named *.android so that *.Linux can run first.
+
+. "${LINUX_CHROOT_RCDIR}/rc.lib"
+
+if [ -z "$android_dirs" ]; then
+    exit 0
+fi
+
+for adir in $android_dirs
+do
+    if ! mounted "$adir"
+    then
+        mkdir -p "${LINUX_CHROOT}${adir}" 2>/dev/null
+        mount -o bind "$adir" "${LINUX_CHROOT}${adir}" 2>/dev/null
+    fi
+done
+

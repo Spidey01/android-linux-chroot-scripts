@@ -13,7 +13,6 @@ for sdir in /sys/kernel/debug /sys \
 do
     if mounted "$sdir"
     then
-        echo "umount for chroot/$sdir"
         umount "${LINUX_CHROOT}${sdir}"
     fi
 done

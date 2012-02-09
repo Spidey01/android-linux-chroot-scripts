@@ -1,0 +1,17 @@
+# Un-mount Android directories.
+# Named *.android so that *.Linux can run first.
+
+. "${LINUX_CHROOT_RCDIR}/rc.lib"
+
+if [ -n "$leave_android_dirs" ]; then
+    exit 0
+fi
+
+
+for adir in $android_dirs
+do
+    if mounted "$adir"
+    then
+        umount "${LINUX_CHROOT}${adir}"
+    fi
+done
