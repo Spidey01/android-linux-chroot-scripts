@@ -2,8 +2,11 @@
 #
 # My custom script for chrooting into a linux chroot.
 # This is run OUTSIDE the chroot by ANDROID.
+# You must be root.
 #
 
+# this is stuff for init scripts, login will sanitize the shell session.
+export PATH="/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
 export TERM=linux
 export HOME=/root
 export USER=root
@@ -30,10 +33,15 @@ done
 if [ -z "$LINUX_CHROOT" ]; then
     export LINUX_CHROOT=/data/local/Linux
 fi
+export LINUX_CHROOT_RCDIR="${LINUX_CHROOT}/etc/init.android"
 
 if [ ! -d "$LINUX_CHROOT" ]; then
     echo "No chroot detected. Aborting."
     echo "Export LINUX_CHROOT or link your chroot to /data/local/Linux"
+    exit 127
+fi
+if [ ! -d "$LINUX_CHROOT_RCDIR" ]; then
+    echo "Can't find chroot init scripts. Aborting."
     exit 127
 fi
 
@@ -61,7 +69,7 @@ echo "Initializing chroot..."
     for rc in \
         "/etc/init.android/rc.enter" \
         "/usr/local/etc/init.android/rc.enter" \
-        "chroot $LINUX_CHROOT env PWD= SHELL=/bin/sh /bin/sh -i -l" \
+        "chroot $LINUX_CHROOT /usr/bin/env PWD= SHELL=/bin/sh /bin/sh -i -l" \
         "/etc/init.android/rc.leave" \
         "/usr/local/etc/init.android/rc.leave"
     do
