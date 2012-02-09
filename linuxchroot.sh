@@ -69,7 +69,7 @@ echo "Initializing chroot..."
     for rc in \
         "/etc/init.android/rc.enter" \
         "/usr/local/etc/init.android/rc.enter" \
-        "chroot $LINUX_CHROOT /usr/bin/env PWD= SHELL=/bin/sh /bin/sh -i -l" \
+        "chroot $LINUX_CHROOT /bin/login -f root" \
         "/etc/init.android/rc.leave" \
         "/usr/local/etc/init.android/rc.leave"
     do
