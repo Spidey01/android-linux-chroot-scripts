@@ -29,4 +29,8 @@ if [ -n "$resolv_map" ]; then
             break
         fi
     done
+else
+    # best guess of the moment
+    getprop net.dns1 >  ./etc/resolv.conf
+    getprop net.dns2 >> ./etc/resolv.conf
 fi
