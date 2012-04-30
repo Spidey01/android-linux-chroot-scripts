@@ -15,3 +15,4 @@ TODO
 	How do we turn on IPv6 forwarding?
 	Mounting stuff and mtab management
 	fstab?
+	should local rc.leave run before system rc.leave?

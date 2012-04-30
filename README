@@ -45,7 +45,7 @@ The execution order is as follows:
 			etc/init.android/E*
 		usr/local/etc/init.android/rc.enter ->
 			usr/local/etc/init.android/E*
-		chroot $LINUX_CHROOT /bin/sh ->
+		chroot $LINUX_CHROOT /bin/login -f root ->
 			Your initial shell.
 		etc/init.android/rc.leave ->
 			etc/init.android/L*
@@ -53,3 +53,4 @@ The execution order is as follows:
 			usr/local/etc/init.android/L*
 
 
+These scripts are executed after changing directory to the LINUX_CHROOT, but not within it.
