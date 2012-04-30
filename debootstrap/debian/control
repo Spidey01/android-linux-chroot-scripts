@@ -1,0 +1,25 @@
+Source: debootstrap
+Section: admin
+Priority: extra
+Maintainer: Debian Install System Team <debian-boot@lists.debian.org>
+Uploaders: Anthony Towns <ajt@debian.org>, Joey Hess <joeyh@debian.org>, Frans Pop <fjp@debian.org>, Junichi Uekawa <dancer@debian.org>, Colin Watson <cjwatson@debian.org>
+Build-Depends: debhelper (>= 7.0.50), makedev (>= 2.3.1-69)
+Standards-Version: 3.9.1
+Vcs-Svn: svn://svn.debian.org/d-i/trunk/packages/debootstrap
+
+Package: debootstrap
+Architecture: all
+Depends: ${misc:Depends}, wget
+Recommends: gnupg
+Description: Bootstrap a basic Debian system
+ debootstrap is used to create a Debian base system from scratch,
+ without requiring the availability of dpkg or apt. It does this by
+ downloading .deb files from a mirror site, and carefully unpacking them
+ into a directory which can eventually be chrooted into.
+
+Package: debootstrap-udeb
+Section: debian-installer
+XC-Package-Type: udeb
+Architecture: all
+Depends: ${misc:Depends}, mounted-partitions
+Description: Bootstrap the Debian system

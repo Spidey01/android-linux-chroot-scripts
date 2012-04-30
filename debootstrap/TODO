@@ -1,0 +1,20 @@
+
+Features:
+  ++ second stage via chroot debootstrap/debootstrap
+  ++ debootstrap/deb file to record deb destinations/information
+
+  -- configuration file
+      -- versus command line
+      -- support for sources (vs mirrors)
+      -- faux-pinning for packages 
+
+  ++ merge variants into single script (optionally anyway)
+  ++ makedev in second stage
+  ++ awk/perl pkgdetails
+  ++ granular dpkg progress bar
+  ++ determine required/base dynamically
+      ++ store required/base in $T/debootstrap for two-stage installs
+
+Packages format:
+  std: Priority: required + Priority: important
+  buildd: Priority: required + Build-Essential: yes

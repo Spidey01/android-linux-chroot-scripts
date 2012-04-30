@@ -1,0 +1,20 @@
+sh: /usr/share/debootstrap/scripts/./testchroot: No such file or directory
+sh: can't execute 'error': No such file or directory
+sh: can't execute 'download_indices': No such file or directory
+sh: can't execute 'work_out_debs': No such file or directory
+sh: can't execute 'without': No such file or directory
+sh: can't execute 'without': No such file or directory
+sh: can't execute 'without': No such file or directory
+sh: can't execute 'info': No such file or directory
+sh: can't execute 'resolve_deps': No such file or directory
+sh: can't execute 'info': No such file or directory
+sh: can't execute 'resolve_deps': No such file or directory
+sh: can't execute 'without': No such file or directory
+sh: can't execute 'without': No such file or directory
+sh: can't execute 'without': No such file or directory
+sh: can't execute 'download': No such file or directory
+sh: can't execute 'choose_extractor': No such file or directory
+sh: can't execute 'first_stage_install': No such file or directory
+cp: './debootstrap/debootstrap' and '/mnt/sdcard/tmp/Spidey01-android-linux-chroot-scripts-19ab8b2//debootstrap/debootstrap' are the same file
+cp: can't stat '/usr/share/debootstrap/functions': No such file or directory
+cp: can't stat '/usr/share/debootstrap/scripts/./testchroot': No such file or directory
