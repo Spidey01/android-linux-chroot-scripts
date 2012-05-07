@@ -57,5 +57,13 @@ then
     echo "Failed to run initial debootstrap; *sadface*"
     exit 1
 fi
+if ! busybox sh \
+     env DEBOOTSTRAP_DIR= chroot "$LINUX_CHROOT" /debootstrap/debootstrap --second-stage
+then
+    echo "Failed to run second stage debootstrap; *sadface*"
+    exit 1
+fi
+
+
 
 
