@@ -11,3 +11,5 @@ do
     fi
 done
 
+[ -n "$mtab_is_proc_mounts" ] && $busybox chroot . ln -sf /proc/mounts /etc/mtab
+
