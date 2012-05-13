@@ -9,7 +9,16 @@ case $clean_tmpdir in
         exit 0
         ;;
     *)
-        rm -rf ./tmp/*
+        if [ -n "$clean_tmpdir_filters" ]; then
+            (for filter in $clean_tmpdir_filters
+             do
+                 echo "cleaning ./tmp with $filter"
+                 ls ./tmp/ | busybox sh $filter
+             done
+            )
+        else
+            rm -rf ./tmp/*
+        fi
         ;;
 esac
 
