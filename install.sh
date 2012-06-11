@@ -64,6 +64,9 @@ then
     exit 1
 fi
 
-
-
+echo "Copying Android related init scripts"
+cp -R etc/init.android "$LINUX_CHROOT_RCDIR"
+chmod 0755 ./etc/init.android/E* ./etc/init.android/L* ./etc/rc.enter ./etc/rc.leave
+cp -R usr/local/etc/init.android "${LINUX_CHROOT}/usr/local/etc/init.android"
+chmod 0755 ./usr/local/etc/init.android/E* ./usr/local/etc/init.android/L* ./usr/local/etc/rc.enter ./usr/local/etc/rc.leave
 

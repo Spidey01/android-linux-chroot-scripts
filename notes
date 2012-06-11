@@ -7,12 +7,13 @@ installer needs to
 
 README
 
-	update to note that init scripts are run from in the context of cd $LINUX_CHROOT.
 	update to note which scripts must return 0 = success != 0 = abort.
 	update to note how rc.conf/script changes from within the chroot fit into exiting.
 
 TODO
 	How do we turn on IPv6 forwarding?
 	Mounting stuff and mtab management
+		ln -s /proc/mounts -> /etc/mtab on an rc.conf switch
 	fstab?
 	should local rc.leave run before system rc.leave?
+	resolv.conf stuff should use resolvmap for dynamic stuff too

@@ -30,7 +30,8 @@ if [ -n "$resolv_map" ]; then
         fi
     done
 else
-    # best guess of the moment
-    getprop net.dns1 >  ./etc/resolv.conf
-    getprop net.dns2 >> ./etc/resolv.conf
+    # best guess of the moment - static ip's and non wlan0 not supported yet
+    cp ./etc/resolv.conf ./etc/resolv.conf.last
+    echo "nameserver `getprop dhcp.${resolv_iface}.dns1`" >  ./etc/resolv.conf
+    echo "nameserver `getprop dhcp.${resolv_iface}.dns2`" >> ./etc/resolv.conf
 fi
