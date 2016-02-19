@@ -41,7 +41,7 @@ fi
 
 # ugh, I hate debootstrap.
 if type perl >/dev/null && [ ! -x pkgdetails ]; then
-    echo "You may need to install perl or cross compile pkgdetails.c""
+    echo "You may need to install perl or cross compile pkgdetails.c"
     echo "If one of my provided binaries work, you can do:"
     echo "     cd `pwd`"
     echo "     ln -s ./pkgdetails.ARCH ./debootstrap/pkgdetails"
